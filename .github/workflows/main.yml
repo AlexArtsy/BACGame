@@ -32,7 +32,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
-          build-root-directory: ./app
+          build-root-directory: ./
       - name: check wd
         run: echo ${{github.workspace}}
       - name: Test & publish code coverage
