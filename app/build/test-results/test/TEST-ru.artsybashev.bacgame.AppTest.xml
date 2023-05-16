@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.artsybashev.bacgame.AppTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-16T21:22:33" hostname="alex-pc" time="0.042">
+<testsuite name="ru.artsybashev.bacgame.AppTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-16T22:05:25" hostname="alex-pc" time="0.044">
   <properties/>
-  <testcase name="testServiceLibContains()" classname="ru.artsybashev.bacgame.AppTest" time="0.042"/>
+  <testcase name="testServiceLibContains()" classname="ru.artsybashev.bacgame.AppTest" time="0.044"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

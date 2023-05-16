@@ -14,7 +14,7 @@ class AppTest {
 
     @BeforeAll
     public static void beforeAll() throws FileNotFoundException {
-        BullsAndCowsGame game = new BullsAndCowsGame(4, "/home/alex/BACGame/app/src/main/resources/log.txt");
+        BullsAndCowsGame game = new BullsAndCowsGame(4, "../app/src/main/resources/log.txt");
     }
     @Test
     public void testServiceLibContains() {
