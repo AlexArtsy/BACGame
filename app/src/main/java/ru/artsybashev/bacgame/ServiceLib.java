@@ -19,21 +19,21 @@ public class ServiceLib {
         }
         return result;
     }
-    public static String getNormalizedAnswer(int value, boolean type) {
+    public static String getNormalizedAnswer(int value, String[] mask) {
         String normalizedAnswer;
         if (value > 10 && value < 20) {
-            normalizedAnswer = value + (type ? " быков" : " коров");
+            normalizedAnswer = value + " " + mask[0];
             return normalizedAnswer;
         }
         switch (value % 10) {
             case 1:
-                normalizedAnswer = value + (type ? " бык" : " корова");
+                normalizedAnswer = value + " " + mask[1];
                 break;
             case 2, 3, 4:
-                normalizedAnswer = value + (type ? " быка" : " коровы");
+                normalizedAnswer = value + " " + mask[2];
                 break;
             default:
-                normalizedAnswer = value + (type ? " быков" : " коров");
+                normalizedAnswer = value + " " + mask[0];
         }
         return normalizedAnswer;
     }

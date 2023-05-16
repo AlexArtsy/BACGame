@@ -39,27 +39,30 @@ public class GameIO {
         return readNumber() + 1;
     }
     public void writeStepResult(int bulls, int cows) {
+        String[] bullsMask = {"быков", "бык", "быка"};
+        String[] cowsMask = {"коров", "корова", "коровы"};
         cOut(
-                ServiceLib.getNormalizedAnswer(bulls, true) //  true - быки
+                ServiceLib.getNormalizedAnswer(bulls, bullsMask) //
                 + " "
-                + ServiceLib.getNormalizedAnswer(cows, false) //    false - коровы
+                + ServiceLib.getNormalizedAnswer(cows, cowsMask) //
         );
     }
     public void writeLogToFile(Logger log) throws IOException {
-        //System.out.println(log.getGameInfo());
         FileWriter writer = new FileWriter(filePath, true);
         writer.write(log.getGameInfo());
         writer.flush();
     }
-    public int cIn() {
+    public int cIn() throws IOException {
+        //String answer = in.nextLine();
+        //System.out.println(("otvet: " + answer));
         int consoleInput = in.nextInt();
-        //in.close(); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return consoleInput;
+        //return 0;
     }
     public void cOut(String str) {
         System.out.println(str);
     }
-    public int readUserVariant() {
+    public int readUserVariant() throws IOException {
         int userAnswer = cIn();
         return userAnswer;
     }

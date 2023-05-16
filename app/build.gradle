@@ -36,3 +36,5 @@ application {
     // Define the main class for the application.
     mainClass = 'ru.artsybashev.bacgame.App'
 }
+
+run { standardInput = System.in }

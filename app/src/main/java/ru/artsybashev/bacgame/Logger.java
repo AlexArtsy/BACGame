@@ -13,12 +13,14 @@ public class Logger {
         return description + String.join("", gameSteps) + result;
     }
     public void logGameStep(int userVersion, int bulls, int cows) {
+        String[] bullsMask = {"быков", "бык", "быка"};
+        String[] cowsMask = {"коров", "корова", "коровы"};
         this.gameSteps.add(
                 "\tЗапрос: "
                 + userVersion + " Ответ: "
-                + ServiceLib.getNormalizedAnswer(bulls, true)
+                + ServiceLib.getNormalizedAnswer(bulls, bullsMask)
                 + " "
-                + ServiceLib.getNormalizedAnswer(cows, false)
+                + ServiceLib.getNormalizedAnswer(cows, cowsMask)
                 + "\n"
         );
     }
