@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Logger.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">ru.artsybashev.bacgame</a> &gt; <span class="el_source">Logger.java</span></div><h1>Logger.java</h1><pre class="source lang-java linenums">package ru.artsybashev.bacgame;
+
+import java.util.ArrayList;
+
+public class Logger {
+    private String description;
+<span class="fc" id="L7">    private ArrayList&lt;String&gt; gameSteps = new ArrayList&lt;String&gt;();</span>
+    private String result;
+<span class="fc" id="L9">    Logger(BullsAndCowsGame game){</span>
+<span class="fc" id="L10">        this.description = &quot;Game №&quot; + game.getGameNumber() + &quot; &quot; + game.getGameDateAndTime() + &quot; Загаданная строка &quot; + game.getTargetValue() +&quot;\n&quot;;</span>
+<span class="fc" id="L11">    }</span>
+    public String getGameInfo() {
+<span class="nc" id="L13">        return description + String.join(&quot;&quot;, gameSteps) + result;</span>
+    }
+    public void logGameStep(int userVersion, int bulls, int cows) {
+<span class="nc" id="L16">        String[] bullsMask = {&quot;быков&quot;, &quot;бык&quot;, &quot;быка&quot;};</span>
+<span class="nc" id="L17">        String[] cowsMask = {&quot;коров&quot;, &quot;корова&quot;, &quot;коровы&quot;};</span>
+<span class="nc" id="L18">        this.gameSteps.add(</span>
+                &quot;\tЗапрос: &quot;
+                + userVersion + &quot; Ответ: &quot;
+<span class="nc" id="L21">                + ServiceLib.getNormalizedAnswer(bulls, bullsMask)</span>
+                + &quot; &quot;
+<span class="nc" id="L23">                + ServiceLib.getNormalizedAnswer(cows, cowsMask)</span>
+                + &quot;\n&quot;
+        );
+<span class="nc" id="L26">    }</span>
+    public void setResult(int roundCount) {
+<span class="nc" id="L28">        this.result = &quot;Строка была угадана за &quot; + roundCount + &quot; попыток\n&quot;;</span>
+<span class="nc" id="L29">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

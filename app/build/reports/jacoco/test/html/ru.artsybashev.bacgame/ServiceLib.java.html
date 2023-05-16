@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ServiceLib.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">ru.artsybashev.bacgame</a> &gt; <span class="el_source">ServiceLib.java</span></div><h1>ServiceLib.java</h1><pre class="source lang-java linenums">package ru.artsybashev.bacgame;
+
+import java.util.Arrays;
+
+//  класс для всяких вспомогательных методов, чтоб не засорять основную логику
+<span class="nc" id="L6">public class ServiceLib {</span>
+    //   этот метод проверяет не стоят ли нули в старших разрядах числа
+    public static int[] convertIntToArray(int targetValue, int valueOfNumber) {
+<span class="nc" id="L9">        int[] arr = Arrays</span>
+<span class="nc" id="L10">                .stream(Long.toString(targetValue).split(&quot;&quot;))</span>
+<span class="nc" id="L11">                .mapToInt(Integer::parseInt)</span>
+<span class="nc" id="L12">                .toArray();</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        if (arr.length == valueOfNumber) {</span>
+<span class="nc" id="L14">            return arr;</span>
+        }
+<span class="nc" id="L16">        int[] result = new int[valueOfNumber];</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        for(int i = 1; i &lt;= arr.length; i += 1) {</span>
+<span class="nc" id="L18">            result[result.length - i] = arr[arr.length - i];</span>
+        }
+<span class="nc" id="L20">        return result;</span>
+    }
+    public static String getNormalizedAnswer(int value, String[] mask) {
+        String normalizedAnswer;
+<span class="nc bnc" id="L24" title="All 4 branches missed.">        if (value &gt; 10 &amp;&amp; value &lt; 20) {</span>
+<span class="nc" id="L25">            normalizedAnswer = value + &quot; &quot; + mask[0];</span>
+<span class="nc" id="L26">            return normalizedAnswer;</span>
+        }
+<span class="nc bnc" id="L28" title="All 3 branches missed.">        switch (value % 10) {</span>
+            case 1:
+<span class="nc" id="L30">                normalizedAnswer = value + &quot; &quot; + mask[1];</span>
+<span class="nc" id="L31">                break;</span>
+            case 2, 3, 4:
+<span class="nc" id="L33">                normalizedAnswer = value + &quot; &quot; + mask[2];</span>
+<span class="nc" id="L34">                break;</span>
+            default:
+<span class="nc" id="L36">                normalizedAnswer = value + &quot; &quot; + mask[0];</span>
+        }
+<span class="nc" id="L38">        return normalizedAnswer;</span>
+    }
+    public static boolean contains(final int[] array, final int key) {
+        //return Arrays.asList(array).contains(key);
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        return Arrays.stream(array).anyMatch(i -&gt; i == key);</span>
+    }
+    public static int[] getRandomNumberArray(int valueOfDigits) {
+<span class="fc" id="L45">        int[] digits = new int[valueOfDigits];</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (var i = 0; i &lt; valueOfDigits; i += 1) {</span>
+<span class="fc" id="L47">            int randomNum = (int) Math.round(Math.random() * 10);</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">            digits[i] = randomNum == 10 ? 0 : randomNum;</span>
+        }
+<span class="fc" id="L50">        return digits;</span>
+    }
+    public static int convertIntArrToInt(int[] digits) {
+<span class="fc" id="L53">        String[] strArray = Arrays.stream(digits)</span>
+<span class="fc" id="L54">                .mapToObj(String::valueOf)</span>
+<span class="fc" id="L55">                .toArray(String[]::new);</span>
+<span class="fc" id="L56">        return Integer.parseInt(String.join(&quot;&quot;, strArray));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

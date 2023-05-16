@@ -8,7 +8,7 @@ import java.io.IOException;
 public class App {
 
     public static void main(String[] args) throws IOException {
-        BullsAndCowsGame game = new BullsAndCowsGame(4,"/home/alexarts/BACGame/app/src/main/resources/log.txt");
+        BullsAndCowsGame game = new BullsAndCowsGame(4,"/home/alex/BACGame/app/src/main/resources/log.txt");
         game.startGame();
     }
 }
