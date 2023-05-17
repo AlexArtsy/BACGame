@@ -1,5 +1,7 @@
 package ru.artsybashev.bacgame;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 //  класс для всяких вспомогательных методов, чтоб не засорять основную логику
@@ -54,5 +56,27 @@ public class ServiceLib {
                 .mapToObj(String::valueOf)
                 .toArray(String[]::new);
         return Integer.parseInt(String.join("", strArray));
+    }
+    public static String getCurrenDirectoryPath() {
+        String path = App.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String last = path.substring(path.length() - 1);
+        //  если в пути не присутствует название  файла
+        if (last.equals("/")) {
+            return App.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        }
+        //  убираем название файла
+        String[] arr = path.split("/");
+        arr[arr.length - 1] = "";
+        return String.join("/", arr);
+    }
+    public static void generateSpareFile() throws IOException {
+        String newFilepath = getCurrenDirectoryPath() + "newLog.txt";
+        File file = new File(newFilepath);
+        file.createNewFile();
+        if (Checkout.checkFileExisting(newFilepath) ) {
+            System.out.println("Создан новый файл");
+        } else {
+            System.out.println("Ошибка! Файл не создан!");
+        }
     }
 }

@@ -17,7 +17,7 @@ public class GameIO {
     public void closeSystemInScanner() {
         this.in.close();
     }
-    public int readNumber () throws FileNotFoundException {
+    private int readNumber () throws FileNotFoundException {
         FileReader reader = new FileReader(this.filePath);
         Scanner scanner = new Scanner(reader);
         ArrayList<String> list = new ArrayList<>();
@@ -30,21 +30,21 @@ public class GameIO {
             String str = list.get(i);
             if(str.contains("Game")) {
                 int startIndex = str.indexOf("№") + 1;
-                number = str.substring(startIndex, str.indexOf(" ", startIndex));
+                number = str.substring(startIndex, str.indexOf(" ", startIndex)) + 1;
             }
         }
         return Integer.parseInt(number);
     }
     public int readGameNumber() throws FileNotFoundException {
-        return readNumber() + 1;
+        return readNumber();
     }
     public void writeStepResult(int bulls, int cows) {
-        String[] bullsMask = {"быков", "бык", "быка"};
-        String[] cowsMask = {"коров", "корова", "коровы"};
+        String[] bullsMatrix = {"быков", "бык", "быка"};
+        String[] cowsMatrix = {"коров", "корова", "коровы"};
         cOut(
-                ServiceLib.getNormalizedAnswer(bulls, bullsMask) //
+                ServiceLib.getNormalizedAnswer(bulls, bullsMatrix) //
                 + " "
-                + ServiceLib.getNormalizedAnswer(cows, cowsMask) //
+                + ServiceLib.getNormalizedAnswer(cows, cowsMatrix) //
         );
     }
     public void writeLogToFile(Logger log) throws IOException {
@@ -66,6 +66,4 @@ public class GameIO {
         int userAnswer = cIn();
         return userAnswer;
     }
-
-
 }

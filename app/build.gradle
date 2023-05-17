@@ -47,3 +47,9 @@ jacocoTestReport {
         xml.required = true
     }
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.artsybashev.bacgame.App'
+    }
+}

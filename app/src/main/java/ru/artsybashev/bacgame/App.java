@@ -3,12 +3,34 @@
  */
 package ru.artsybashev.bacgame;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class App {
-
+    public static String filepath;
     public static void main(String[] args) throws IOException {
-        BullsAndCowsGame game = new BullsAndCowsGame(4,"../app/src/main/resources/log.txt");
+        System.out.println(Checkout.checkFileExisting("./app/src/main/resources/log.txt"));
+
+        // проверяем указан ли путь к файлу и существует ли файл
+        if (Checkout.checkArgs1(args) && Checkout.checkFileExisting(args[1])) {
+            filepath = args[1];
+        } else {
+            // проверяем доступен ли служебный Log файл
+            if (Checkout.checkFileExisting("./app/src/main/resources/log.txt")) {
+                filepath = "./app/src/main/resources/log.txt";
+                System.out.println("hmmmmmmmmmmmmmmmmm");
+            } else if(Checkout.checkFileExisting(ServiceLib.getCurrenDirectoryPath() + "newLog.txt")) {
+                filepath = ServiceLib.getCurrenDirectoryPath() + "newLog.txt";
+            } else {    //   если служебный и резервный файлы не доступны, генерируем новый
+                System.out.println("Log файл не существует!");
+                ServiceLib.generateSpareFile();
+                filepath = ServiceLib.getCurrenDirectoryPath() + "newLog.txt";
+            }
+        }
+
+        System.out.println("Log файл находится в директории: " + filepath);
+        BullsAndCowsGame game = new BullsAndCowsGame(4, filepath);
         game.startGame();
     }
 }

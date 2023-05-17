@@ -24,4 +24,7 @@ lint:
 
 build-run: build run
 
+jar:
+	./gradlew jar
+
 .PHONY: build
