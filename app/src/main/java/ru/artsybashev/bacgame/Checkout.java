@@ -3,8 +3,14 @@ package ru.artsybashev.bacgame;
 import java.io.File;
 
 public class Checkout {
-    public static void checkUserAnswer() {
-
+    public static boolean checkUserAnswer(String answer, int valueOfDigits) {
+        boolean isOnlyDigits = true;
+        for(int i = 0; i < answer.length() && isOnlyDigits; i++) {
+            if(!Character.isDigit(answer.charAt(i))) {
+                isOnlyDigits = false;
+            }
+        }
+        return isOnlyDigits && answer.length() == valueOfDigits;
     }
     public static boolean checkFileExisting(String filepath) {
         File file = new File(filepath);

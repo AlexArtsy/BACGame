@@ -25,15 +25,15 @@ public class GameIO {
             list.add(scanner.nextLine());
         }
         scanner.close();
-        String number = "1";
+        String numberOfLastGame = "0";
         for(int i = 0; i < list.size(); i += 1) {
             String str = list.get(i);
             if(str.contains("Game")) {
                 int startIndex = str.indexOf("№") + 1;
-                number = str.substring(startIndex, str.indexOf(" ", startIndex)) + 1;
+                numberOfLastGame = str.substring(startIndex, str.indexOf(" ", startIndex));
             }
         }
-        return Integer.parseInt(number);
+        return Integer.parseInt(numberOfLastGame) + 1;
     }
     public int readGameNumber() throws FileNotFoundException {
         return readNumber();
@@ -52,18 +52,16 @@ public class GameIO {
         writer.write(log.getGameInfo());
         writer.flush();
     }
-    public int cIn() throws IOException {
-        //String answer = in.nextLine();
-        //System.out.println(("otvet: " + answer));
-        int consoleInput = in.nextInt();
+    public String readUserAnswer() throws IOException {
+        String userAnswer = cIn();
+        return userAnswer;
+    }
+    public String cIn() throws IOException {
+        String consoleInput = in.nextLine();
         return consoleInput;
         //return 0;
     }
     public void cOut(String str) {
         System.out.println(str);
-    }
-    public int readUserVariant() throws IOException {
-        int userAnswer = cIn();
-        return userAnswer;
     }
 }

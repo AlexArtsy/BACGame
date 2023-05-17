@@ -12,7 +12,7 @@ public class Logger {
     public String getGameInfo() {
         return description + String.join("", gameSteps) + result;
     }
-    public void logGameStep(int userVersion, int bulls, int cows) {
+    public void logGameStep(String userVersion, int bulls, int cows) {
         String[] bullsMask = {"быков", "бык", "быка"};
         String[] cowsMask = {"коров", "корова", "коровы"};
         this.gameSteps.add(

@@ -5,16 +5,40 @@ package ru.artsybashev.bacgame;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-
+    private static BullsAndCowsGame game;
     @BeforeAll
     public static void beforeAll() throws FileNotFoundException {
-        BullsAndCowsGame game = new BullsAndCowsGame(4, "../app/src/main/resources/log.txt");
+        game = new BullsAndCowsGame(4, "../app/src/main/resources/log.txt");
+    }
+    @Test
+    public void testGameThreeDigits() throws IOException {
+        game.setTargetValue("0123");
+        game.setUserAnswer("0123");
+        game.testMode = true;
+        game.doNextStep();
+        assertTrue(game.isGameFinished);
+    }
+    @Test
+    public void gameNoFileExistNoThrow() throws IOException {
+        //assertDoesNotThrow(this.createGame());
+    }
+    public Executable createGame() throws IOException {
+        String[] args = {"4", ""};
+        App.main(args);
+        return null;
+    }
+    @Test
+    public void testServiceLibConvertIntArrToString() {
+        int[] arr = {0, 1, 2, 3};
+        assertEquals("0123", ServiceLib.convertIntArrToString(arr));
     }
     @Test
     public void testServiceLibContains() {
@@ -25,16 +49,22 @@ class AppTest {
     public void testServiceLibConvertIntArrToInt() {
 
     }
-    public void testServiceLibgetNormalizedAnswer() {
+    @Test
+    public void testServiceLibGetNormalizedAnswer() {
         String[] testMask1 = {"шагов", "шаг", "шага"};
         String[] testMask2 = {"козлов", "козел", "козла"};
         var expected11 = "2 шага";
-        var expected12 = "67 шагов";
+        var expected12 = "11 шагов";
         var expected13 = "1 шаг";
         var expected21 = "4 козла";
         var expected22 = "999 козлов";
         var expected23 = "1 козел";
-        assertSame(expected11, ServiceLib.getNormalizedAnswer(2, testMask1));
+        assertEquals(expected11, ServiceLib.getNormalizedAnswer(2, testMask1));
+        assertEquals(expected12, ServiceLib.getNormalizedAnswer(11, testMask1));
+        assertEquals(expected13, ServiceLib.getNormalizedAnswer(1, testMask1));
+        assertEquals(expected21, ServiceLib.getNormalizedAnswer(4, testMask2));
+        assertEquals(expected22, ServiceLib.getNormalizedAnswer(999, testMask2));
+        assertEquals(expected23, ServiceLib.getNormalizedAnswer(1, testMask2));
 
     }
 

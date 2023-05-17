@@ -57,6 +57,12 @@ public class ServiceLib {
                 .toArray(String[]::new);
         return Integer.parseInt(String.join("", strArray));
     }
+    public static String convertIntArrToString(int[] digits) {
+        String[] strArray = Arrays.stream(digits)
+                .mapToObj(String::valueOf)
+                .toArray(String[]::new);
+        return String.join("", strArray);
+    }
     public static String getCurrenDirectoryPath() {
         String path = App.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String last = path.substring(path.length() - 1);
