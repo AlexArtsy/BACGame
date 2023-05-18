@@ -6,15 +6,18 @@ package ru.artsybashev.bacgame;
 import java.io.IOException;
 
 public class App {
-    public static String filepath;
+    private static String filepath;
+    private static int numOfDigits = 4;
     public static void main(String[] args) throws IOException {
-
+        //  проверяем ввел ли пользователь количество разрядов
+        if (Checkout.checkArgs0(args) && Checkout.isContainOnlyDigits(args[0])) {
+            numOfDigits = Integer.parseInt(args[0]) < 10 ? Integer.parseInt(args[0]) : 4;
+        }
         // проверяем указан ли путь к файлу и существует ли файл
         if (Checkout.checkArgs1(args) && Checkout.checkFileExisting(args[1])) {
             filepath = args[1];
         } else {
             // проверяем доступен ли служебный Log файл
-            System.out.println("Log файл недоступен");
             if (Checkout.checkFileExisting("./app/src/main/resources/log.txt")) {
                 filepath = "./app/src/main/resources/log.txt";
             } else if(Checkout.checkFileExisting(ServiceLib.getCurrenDirectoryPath() + "newLog.txt")) {
@@ -27,7 +30,7 @@ public class App {
         }
 
         System.out.println("Log файл находится в директории: " + filepath);
-        BullsAndCowsGame game = new BullsAndCowsGame(4, filepath);
+        BullsAndCowsGame game = new BullsAndCowsGame(numOfDigits, filepath);
         game.startGame();
     }
 }

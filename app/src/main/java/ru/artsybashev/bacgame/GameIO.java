@@ -38,14 +38,14 @@ public class GameIO {
     public int readGameNumber() throws FileNotFoundException {
         return readNumber();
     }
-    public void writeStepResult(int bulls, int cows) {
+    public String writeStepResult(int bulls, int cows) {
         String[] bullsMatrix = {"быков", "бык", "быка"};
         String[] cowsMatrix = {"коров", "корова", "коровы"};
-        cOut(
-                ServiceLib.getNormalizedAnswer(bulls, bullsMatrix) //
+        String result = ServiceLib.getNormalizedAnswer(bulls, bullsMatrix)
                 + " "
-                + ServiceLib.getNormalizedAnswer(cows, cowsMatrix) //
-        );
+                + ServiceLib.getNormalizedAnswer(cows, cowsMatrix);
+        cOut(result);
+        return result;
     }
     public void writeLogToFile(Logger log) throws IOException {
         FileWriter writer = new FileWriter(filePath, true);

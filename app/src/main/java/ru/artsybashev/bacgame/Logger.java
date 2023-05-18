@@ -25,6 +25,8 @@ public class Logger {
         );
     }
     public void setResult(int roundCount) {
-        this.result = "Строка была угадана за " + roundCount + " попыток\n";
+        String[] tryMatrix = {"попыток", "попыту", "попытки"};
+        this.result = "Строка была угадана за " + ServiceLib.getNormalizedAnswer(roundCount, tryMatrix) + "\n";
+
     }
 }

@@ -9,24 +9,26 @@ public class BullsAndCowsGame extends GameEngine {
     private int[] targetValueArr;
     private int valueOfDigits;
     private Logger log;
+
+    //   поля для тестирования
     public boolean testMode = false;
+    public String stepResult;
     BullsAndCowsGame(int valueOfDigits, String filePathForLogging) throws FileNotFoundException {
         super(new GameIO(filePathForLogging));
         this.valueOfDigits = valueOfDigits;
         this.targetValueArr =  ServiceLib.getRandomNumberArray(valueOfDigits);
         this.targetValue = ServiceLib.convertIntArrToString(targetValueArr);
-        //this.targetValue = ServiceLib.convertIntArrToString({0, 1, 2, 3});
         this.log = new Logger(this);
     }
     public void startGame() throws IOException {
-        gameIO.cOut("Start Game: " + targetValue);
+        gameIO.cOut("Игра начата! Загадано " + valueOfDigits + "-значное число");
         while(!isGameFinished) {
             nextStep();
         }
     }
     private void nextStep() throws IOException {
         this.roundCount += 1;
-        this.userAnswer = !testMode ? gameIO.readUserAnswer() : userAnswer;
+        this.userAnswer = !testMode ? gameIO.readUserAnswer() : userAnswer; //  костыль для тестирования
         if (!Checkout.checkUserAnswer(userAnswer, valueOfDigits)) {
             gameIO.cOut("Некорректное значение, введите число из " + valueOfDigits + " знаков");
             this.roundCount -= 1;
@@ -39,11 +41,12 @@ public class BullsAndCowsGame extends GameEngine {
         int[] userAnswerArr = ServiceLib.convertIntToArray(Integer.parseInt(userAnswer), valueOfDigits);
         int bulls = checkBullsValue(userAnswerArr);
         int cows = checkCowsValue(userAnswerArr);
-        gameIO.writeStepResult(bulls, cows);
+        stepResult = gameIO.writeStepResult(bulls, cows);
         log.logGameStep(userAnswer, bulls, cows);
     }
     private void finishGame() throws IOException {
         this.isGameFinished = true;
+        gameIO.cOut("Вы угадали, игра закончена");
         log.setResult(roundCount);
         gameIO.writeLogToFile(log);
     }
@@ -68,8 +71,9 @@ public class BullsAndCowsGame extends GameEngine {
     public String getTargetValue() {
         return targetValue;
     }
-    public void setTargetValue(String value) {
-        this.targetValue = value;
+    public void setTargetValue(int[] valueArr) {
+        this.targetValueArr = valueArr;
+        this.targetValue = ServiceLib.convertIntArrToString(valueArr);
     }
     public void setUserAnswer(String value) {
         this.userAnswer = value;

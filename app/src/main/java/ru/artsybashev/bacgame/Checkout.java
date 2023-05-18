@@ -4,13 +4,19 @@ import java.io.File;
 
 public class Checkout {
     public static boolean checkUserAnswer(String answer, int valueOfDigits) {
+        return isContainOnlyDigits(answer) && isCorrectValueOfDigitsInUserAnswer(answer, valueOfDigits);
+    }
+    public static boolean isContainOnlyDigits(String answer) {
         boolean isOnlyDigits = true;
         for(int i = 0; i < answer.length() && isOnlyDigits; i++) {
             if(!Character.isDigit(answer.charAt(i))) {
                 isOnlyDigits = false;
             }
         }
-        return isOnlyDigits && answer.length() == valueOfDigits;
+        return isOnlyDigits;
+    }
+    public static boolean isCorrectValueOfDigitsInUserAnswer(String answer, int valueOfDigits) {
+        return answer.length() == valueOfDigits;
     }
     public static boolean checkFileExisting(String filepath) {
         File file = new File(filepath);

@@ -5,35 +5,49 @@ package ru.artsybashev.bacgame;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
     private static BullsAndCowsGame game;
     @BeforeAll
     public static void beforeAll() throws FileNotFoundException {
         game = new BullsAndCowsGame(4, "../app/src/main/resources/log.txt");
+        game.testMode = true;
     }
     @Test
     public void testGameThreeDigits() throws IOException {
-        game.setTargetValue("0123");
+        int[] target = {0, 1, 2, 3};
+        game.setTargetValue(target);
         game.setUserAnswer("0123");
         game.testMode = true;
         game.doNextStep();
         assertTrue(game.isGameFinished);
     }
     @Test
-    public void gameNoFileExistNoThrow() throws IOException {
-        //assertDoesNotThrow(this.createGame());
-    }
-    public Executable createGame() throws IOException {
-        String[] args = {"4", ""};
-        App.main(args);
-        return null;
+    public void testGameSteps() throws IOException {
+        int[] target = {7, 2, 6, 1};
+        game.setTargetValue(target);
+
+        game.setUserAnswer("7000");
+        game.doNextStep();
+        assertEquals("1 бык 0 коров", game.stepResult);
+
+        game.setUserAnswer("7700");
+        game.doNextStep();
+        assertEquals("1 бык 1 корова", game.stepResult);
+
+        game.setUserAnswer("0271");
+        game.doNextStep();
+        assertEquals("2 быка 1 корова", game.stepResult);
+
+        game.setUserAnswer("7777");
+        game.doNextStep();
+        assertEquals("1 бык 3 коровы", game.stepResult);
     }
     @Test
     public void testServiceLibConvertIntArrToString() {
@@ -45,9 +59,6 @@ class AppTest {
         int[] testArray = {1, 3, -5, 68, 99};
         assertTrue(ServiceLib.contains(testArray, 99));
         assertTrue(!ServiceLib.contains(testArray, 9));
-    }
-    public void testServiceLibConvertIntArrToInt() {
-
     }
     @Test
     public void testServiceLibGetNormalizedAnswer() {
@@ -65,7 +76,6 @@ class AppTest {
         assertEquals(expected21, ServiceLib.getNormalizedAnswer(4, testMask2));
         assertEquals(expected22, ServiceLib.getNormalizedAnswer(999, testMask2));
         assertEquals(expected23, ServiceLib.getNormalizedAnswer(1, testMask2));
-
     }
 
 }
