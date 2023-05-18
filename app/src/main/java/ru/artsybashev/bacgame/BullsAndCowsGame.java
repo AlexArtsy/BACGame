@@ -16,6 +16,7 @@ public class BullsAndCowsGame extends GameEngine {
     BullsAndCowsGame(int valueOfDigits, String filePathForLogging) throws FileNotFoundException {
         super(new GameIO(filePathForLogging));
         this.valueOfDigits = valueOfDigits;
+        //  такой геморой с генерацией случайного значения связан с тем, что пытался генерировать огромные числа
         this.targetValueArr =  ServiceLib.getRandomNumberArray(valueOfDigits);
         this.targetValue = ServiceLib.convertIntArrToString(targetValueArr);
         this.log = new Logger(this);

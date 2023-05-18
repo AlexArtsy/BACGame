@@ -51,19 +51,14 @@ public class ServiceLib {
         }
         return digits;
     }
-    public static int convertIntArrToInt(int[] digits) {
-        String[] strArray = Arrays.stream(digits)
-                .mapToObj(String::valueOf)
-                .toArray(String[]::new);
-        return Integer.parseInt(String.join("", strArray));
-    }
     public static String convertIntArrToString(int[] digits) {
         String[] strArray = Arrays.stream(digits)
                 .mapToObj(String::valueOf)
                 .toArray(String[]::new);
         return String.join("", strArray);
     }
-    public static String getCurrenDirectoryPath() {
+    public static String getCurrentDirectoryPath() {
+        //String slash = System.getProperty("os.name").toLowerCase().contains("windows") ? "\\" : "/";
         String path = App.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String last = path.substring(path.length() - 1);
         //  если в пути не присутствует название  файла
@@ -76,7 +71,7 @@ public class ServiceLib {
         return String.join("/", arr);
     }
     public static void generateSpareFile() throws IOException {
-        String newFilepath = getCurrenDirectoryPath() + "newLog.txt";
+        String newFilepath = getCurrentDirectoryPath() + "newLog.txt";
         File file = new File(newFilepath);
         file.createNewFile();
         if (Checkout.checkFileExisting(newFilepath) ) {

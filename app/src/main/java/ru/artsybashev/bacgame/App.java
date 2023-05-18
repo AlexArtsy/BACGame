@@ -20,12 +20,12 @@ public class App {
             // проверяем доступен ли служебный Log файл
             if (Checkout.checkFileExisting("./app/src/main/resources/log.txt")) {
                 filepath = "./app/src/main/resources/log.txt";
-            } else if(Checkout.checkFileExisting(ServiceLib.getCurrenDirectoryPath() + "newLog.txt")) {
-                filepath = ServiceLib.getCurrenDirectoryPath() + "newLog.txt";
+            } else if(Checkout.checkFileExisting(ServiceLib.getCurrentDirectoryPath() + "newLog.txt")) {
+                filepath = ServiceLib.getCurrentDirectoryPath() + "newLog.txt";
             } else {    //   если служебный и резервный файлы не доступны, генерируем новый
                 System.out.println("Log файл не существует!");
                 ServiceLib.generateSpareFile();
-                filepath = ServiceLib.getCurrenDirectoryPath() + "newLog.txt";
+                filepath = ServiceLib.getCurrentDirectoryPath() + "newLog.txt";
             }
         }
 

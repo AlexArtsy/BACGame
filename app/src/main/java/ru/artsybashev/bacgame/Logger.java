@@ -6,8 +6,19 @@ public class Logger {
     private String description;
     private ArrayList<String> gameSteps = new ArrayList<String>();
     private String result;
+    private boolean isWindows = System.getProperty("os.name").toLowerCase().contains("windows");
+    private String slash;
+    private String newLineSymbol;
     Logger(BullsAndCowsGame game){
-        this.description = "Game №" + game.getGameNumber() + " " + game.getGameDateAndTime() + " Загаданная строка " + game.getTargetValue() +"\n";
+        this.slash = isWindows ? "\\" : "/";
+        this.newLineSymbol = isWindows ? "\r\n" : "\n";
+        this.description = "Game №"
+                + game.getGameNumber()
+                + " "
+                + game.getGameDateAndTime()
+                + " Загаданная строка "
+                + game.getTargetValue()
+                + newLineSymbol;
     }
     public String getGameInfo() {
         return description + String.join("", gameSteps) + result;
@@ -21,12 +32,12 @@ public class Logger {
                 + ServiceLib.getNormalizedAnswer(bulls, bullsMask)
                 + " "
                 + ServiceLib.getNormalizedAnswer(cows, cowsMask)
-                + "\n"
+                + newLineSymbol
         );
     }
     public void setResult(int roundCount) {
         String[] tryMatrix = {"попыток", "попыту", "попытки"};
-        this.result = "Строка была угадана за " + ServiceLib.getNormalizedAnswer(roundCount, tryMatrix) + "\n";
+        this.result = "Строка была угадана за " + ServiceLib.getNormalizedAnswer(roundCount, tryMatrix) + newLineSymbol;
 
     }
 }
