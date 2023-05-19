@@ -22,6 +22,12 @@ public class Checkout {
         File file = new File(filepath);
         return file.exists();
     }
+    public static int checkAndSetValueOfDigits(String value) {
+        int num = Integer.parseInt(value);
+        boolean isOnlyDigits = isContainOnlyDigits(value);
+        boolean isCorrectRange = num > 0 && num < 11;
+        return isOnlyDigits && isCorrectRange ? num : 4;
+    }
     public static boolean checkArgs0(String[] args) {
         return args.length >= 1;
     }
