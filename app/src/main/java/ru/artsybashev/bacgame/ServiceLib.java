@@ -1,6 +1,5 @@
 package ru.artsybashev.bacgame;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -69,34 +68,6 @@ public class ServiceLib {
         String[] arr = path.split("/");
         arr[arr.length - 1] = "";
         return String.join("/", arr);
-    }
-    public static void generateSpareFile() throws IOException {
-        String newFilepath = getCurrentDirectoryPath() + "newLog.txt";
-        File file = new File(newFilepath);
-        file.createNewFile();
-        if (Checkout.checkFileExisting(newFilepath) ) {
-            System.out.println("Создан новый файл");
-        } else {
-            System.out.println("Ошибка! Файл не создан!");
-        }
-    }
-    public static String getFilePathAlt(String[] args) throws IOException {
-        String filepath;
-        if (Checkout.checkArgs1(args) && Checkout.checkFileExisting(args[1])) {
-            filepath = args[1];
-        } else {
-            // проверяем доступен ли служебный Log файл
-            if (Checkout.checkFileExisting("./app/src/main/resources/log.txt")) {
-                filepath = "./app/src/main/resources/log.txt";
-            } else if(Checkout.checkFileExisting(ServiceLib.getCurrentDirectoryPath() + "newLog.txt")) {
-                filepath = ServiceLib.getCurrentDirectoryPath() + "newLog.txt";
-            } else {    //   если служебный и резервный файлы не доступны, генерируем новый
-                System.out.println("Log файл не существует!");
-                ServiceLib.generateSpareFile();
-                filepath = ServiceLib.getCurrentDirectoryPath() + "newLog.txt";
-            }
-        }
-        return filepath;
     }
     public static String getFilePath(String[] args) throws IOException {
         return Checkout.checkArgs1(args)
