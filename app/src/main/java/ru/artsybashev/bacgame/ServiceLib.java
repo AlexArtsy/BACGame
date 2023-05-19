@@ -76,7 +76,7 @@ public class ServiceLib {
     }
 
     //  реализуем полиморфизм подтипов
-    private static String getAvailableFilepath(LogFilepath path) throws IOException {
+    private static String getAvailableFilepath(ILogFilepath path) throws IOException {
         if (!path.isFileAvailable()) {
             path.getErrorMessage();
             path.createFile();

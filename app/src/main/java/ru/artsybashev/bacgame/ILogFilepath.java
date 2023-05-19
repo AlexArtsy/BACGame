@@ -2,7 +2,7 @@ package ru.artsybashev.bacgame;
 
 import java.io.IOException;
 
-public interface LogFilepath {
+public interface ILogFilepath {
     void getErrorMessage();
     void getInfoMessage();
     boolean isFileAvailable();

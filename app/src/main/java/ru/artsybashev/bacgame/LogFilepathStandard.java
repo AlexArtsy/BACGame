@@ -3,7 +3,7 @@ package ru.artsybashev.bacgame;
 import java.io.File;
 import java.io.IOException;
 
-public class LogFilepathStandard implements LogFilepath {
+public class LogFilepathStandard implements ILogFilepath {
     private String path = "./app/src/main/resources/log.txt";
     private String spareFilepath = ServiceLib.getCurrentDirectoryPath() + "newLog.txt";
     private boolean isSpareFileExist = false;
