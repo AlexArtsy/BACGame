@@ -48,15 +48,19 @@ public class GameIO {
         return result;
     }
     public void writeLogToFile(Logger log) throws IOException {
+        //TODO вот это прям очень плохо. Ты каждый раз при записи создаешь новый объект. Лучше прописать его как поле
+        // класса (как у тебя Scanner объявлен)
         FileWriter writer = new FileWriter(filePath, true);
         writer.write(log.getGameInfo());
         writer.flush();
     }
     public String readUserAnswer() throws IOException {
+        //TODO можно просто return cIn();
         String userAnswer = cIn();
         return userAnswer;
     }
     public String cIn() throws IOException {
+        //TODO можно просто return in.nextLine();
         String consoleInput = in.nextLine();
         return consoleInput;
         //return 0;

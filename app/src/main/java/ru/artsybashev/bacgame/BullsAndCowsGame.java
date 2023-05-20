@@ -5,9 +5,12 @@ import java.io.IOException;
 
 public class BullsAndCowsGame extends GameEngine {
     private String targetValue;
+    //TODO уверен что тебе нужна эта переменная?
     private String userAnswer;
     private int[] targetValueArr;
     private int valueOfDigits;
+    //TODO смотри комментарий в 25 строке
+//     private static Logger log = ...
     private Logger log;
 
     //   поля для тестирования
@@ -19,6 +22,7 @@ public class BullsAndCowsGame extends GameEngine {
         //  такой геморой с генерацией случайного значения связан с тем, что пытался генерировать огромные числа
         this.targetValueArr =  ServiceLib.getRandomNumberArray(valueOfDigits);
         this.targetValue = ServiceLib.convertIntArrToString(targetValueArr);
+        //TODO если используешь логгер, то он обычно объявляется как static поле и сразу инициализируется
         this.log = new Logger(this);
     }
     public void startGame() throws IOException {
@@ -42,6 +46,7 @@ public class BullsAndCowsGame extends GameEngine {
         int[] userAnswerArr = ServiceLib.convertIntToArray(Integer.parseInt(userAnswer), valueOfDigits);
         int bulls = checkBullsValue(userAnswerArr);
         int cows = checkCowsValue(userAnswerArr);
+        //TODO зачем тебе переменная stepResult ?
         stepResult = gameIO.writeStepResult(bulls, cows);
         log.logGameStep(userAnswer, bulls, cows);
     }

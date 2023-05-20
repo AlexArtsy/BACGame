@@ -10,6 +10,7 @@ public class Checkout {
         boolean isOnlyDigits = true;
         for(int i = 0; i < answer.length() && isOnlyDigits; i++) {
             if(!Character.isDigit(answer.charAt(i))) {
+                //TODO здесь можно сразу return false писать
                 isOnlyDigits = false;
             }
         }

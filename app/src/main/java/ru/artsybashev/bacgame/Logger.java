@@ -1,10 +1,11 @@
 package ru.artsybashev.bacgame;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Logger {
     private String description;
-    private ArrayList<String> gameSteps = new ArrayList<String>();
+    private List<String> gameSteps = new ArrayList<>();
     private String result;
     private boolean isWindows = System.getProperty("os.name").toLowerCase().contains("windows");
     private String slash;
@@ -38,6 +39,5 @@ public class Logger {
     public void setResult(int roundCount) {
         String[] tryMatrix = {"попыток", "попыту", "попытки"};
         this.result = "Строка была угадана за " + ServiceLib.getNormalizedAnswer(roundCount, tryMatrix) + newLineSymbol;
-
     }
 }

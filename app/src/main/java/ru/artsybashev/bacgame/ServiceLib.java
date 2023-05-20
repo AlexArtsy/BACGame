@@ -6,6 +6,7 @@ import java.util.Arrays;
 //  класс для всяких вспомогательных методов, чтоб не засорять основную логику
 public class ServiceLib {
     //   этот метод проверяет не стоят ли нули в старших разрядах числа
+    //TODO жестко
     public static int[] convertIntToArray(int targetValue, int valueOfNumber) {
         int[] arr = Arrays
                 .stream(Long.toString(targetValue).split(""))
@@ -42,14 +43,17 @@ public class ServiceLib {
         //return Arrays.asList(array).contains(key);
         return Arrays.stream(array).anyMatch(i -> i == key);
     }
+    //TODO цифры в загаданной строке должны быть уникальными
     public static int[] getRandomNumberArray(int valueOfDigits) {
         int[] digits = new int[valueOfDigits];
         for (var i = 0; i < valueOfDigits; i += 1) {
+            //TODO зачем Math.round и проверка на равенство 10. Можно просто к int приводить
             int randomNum = (int) Math.round(Math.random() * 10);
             digits[i] = randomNum == 10 ? 0 : randomNum;
         }
         return digits;
     }
+    //TODO очень сложно, но ок
     public static String convertIntArrToString(int[] digits) {
         String[] strArray = Arrays.stream(digits)
                 .mapToObj(String::valueOf)
